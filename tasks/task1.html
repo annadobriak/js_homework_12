@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під
+      час сортування бульбашкою
+    </p>
+
+    <script>
+      // генерування рандомного числа від 0 до 50
+      function getRandomNumber() {
+        return Math.floor(Math.random() * 50)
+      }
+
+      //функція для створення одномірного масиву з 30 випадкових цілих чисел
+      function getRandomArray() {
+        let arr = []
+        for (let i = 0; i < 30; i++) {
+          arr.push(getRandomNumber())
+        }
+        return arr
+      }
+      // функція сортування бульбашкою, знаходимо кількість обмінів, які необхідно зробити
+      function getNumChanged(arrRandomNum) {
+        let changed
+        let numChanged = 0
+        do {
+          changed = false
+          for (let i = 1; i < arrRandomNum.length; i++) {
+            if (arrRandomNum[i - 1] > arrRandomNum[i]) {
+              let tmp = arrRandomNum[i - 1]
+              arrRandomNum[i - 1] = arrRandomNum[i]
+              arrRandomNum[i] = tmp
+              changed = true
+              numChanged++
+            }
+          }
+        } while (changed)
+        return numChanged
+      }
+      // формуємо одномірний масив
+      let arrRandomNum = getRandomArray()
+      // викликаємо функцію для сортування і рахуємо кількість обмінів
+      let numChanged = getNumChanged(arrRandomNum)
+      // 3.Виведення результату
+      document.write(
+        `Під час сортування бульбашкою треба зробити ${numChanged} обмінів`
+      )
+    </script>
+  </body>
+</html>

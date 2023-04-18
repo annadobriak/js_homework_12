@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>
+      Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під
+      час сортування змішуванням.
+    </p>
+
+    <script>
+      // генерування рандомного числа від 0 до 50
+      function getRandomNumber() {
+        return Math.floor(Math.random() * 50)
+      }
+
+      //функція для створення одномірного масиву з 30 випадкових цілих чисел
+      function getRandomArray() {
+        let arr = []
+        for (let i = 0; i < 30; i++) {
+          arr.push(getRandomNumber())
+        }
+        return arr
+      }
+      // кількість обмінів спочатку 0
+      let numChanged = 0
+      // функція міняє місцями елементи і рахує кількість обмінів
+      function swap(arr, i, j) {
+        const akum = arr[i]
+        arr[i] = arr[j]
+        arr[j] = akum
+        numChanged++
+      }
+
+      // функція сортування змішуванням
+      function shakerSort(array) {
+        let numChanged = 0
+        let leftIndex = 0
+        let rightIndex = array.length - 1
+
+        while (leftIndex < rightIndex) {
+          for (let idx = leftIndex; idx < rightIndex; idx++) {
+            if (array[idx] > array[idx + 1]) {
+              swap(array, idx, idx + 1)
+            }
+          }
+          rightIndex--
+
+          for (let idx = rightIndex; idx > leftIndex; idx--) {
+            if (array[idx] < array[idx - 1]) {
+              swap(array, idx, idx - 1)
+            }
+          }
+          leftIndex++
+        }
+        return array
+      }
+      // формуємо одномірний масив
+      let randomArrayNum = getRandomArray()
+      // викликаємо функцію сортування змішуванням
+      shakerSort(randomArrayNum)
+      // 3.Виводимо результат (кількість обмінів при сортуванні змішуванням)
+      document.write(
+        `Під час сортування змішуванням було ${numChanged} обмінів<br>`
+      )
+    </script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Задача 6</h1>
+    <p>
+      Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук
+      визначити, чи є у масиві ім’я довжиною 5 символів і під яким індексом.
+    </p>
+
+    <script>
+      const arrNameUser = [
+        "Anna",
+        "Olga",
+        "Diana",
+        "Natasha",
+        "Kostia",
+        "Oleg",
+        "Tamara",
+        "Tanya",
+      ]
+
+      //функція сортування включенням
+      function insertSort(arrNameUser) {
+        for (let k = 1; k < arrNameUser.length; k++) {
+          const currentElement = arrNameUser[k]
+          let i = k - 1
+          while (i >= 0 && arrNameUser[i] > currentElement) {
+            arrNameUser[i + 1] = arrNameUser[i]
+            i = i - 1
+          }
+          arrNameUser[i + 1] = currentElement
+        }
+        return arrNameUser
+      }
+
+      let arrNameUserSort = insertSort(arrNameUser)
+      document.write(`${arrNameUserSort} <br>`)
+
+      // функція для бінарного пошуку
+      function getFindindex_binarySearch(arr, searchElement) {
+        let start = 0
+        let end = arr.length - 1
+        while (start <= end) {
+          const middle = Math.floor((start + end) / 2)
+          if (arr[middle].length === searchElement) return middle
+          if (arr[middle].length < searchElement) start = middle + 1
+          if (arr[middle].length > searchElement) end = middle - 1
+        }
+        return -1
+      }
+
+      // Виводимо результат
+      let resultIndex = getFindindex_binarySearch(arrNameUserSort, 5)
+      if (resultIndex === -1) {
+        document.write("В даному масиві немає ім'я з 5 символів")
+      } else {
+        document.write(`Індекс імені з 5 символів - ${resultIndex}`)
+      }
+    </script>
+  </body>
+</html>

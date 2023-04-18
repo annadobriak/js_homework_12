@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Для розглянутих методів сортування спробувати вивести етапи сортування
+      шляхом виведення відповідних таблиць за зразком. Тобто кожного разу після
+      обміну елементів вивести поточний стан масиву на екран.
+    </p>
+    <img src="../img/example_4.jpg" alt="Приклад" style="display: block" />
+
+    <script>
+      // довільний масив елементів
+      let arr = [3, 5, 1, 4, 2]
+
+      // функція сортування бульбашкою
+      function getNumChanged(arrRandomNum) {
+        let changed
+        do {
+          changed = false
+          for (let i = 1; i < arrRandomNum.length; i++) {
+            if (arrRandomNum[i - 1] > arrRandomNum[i]) {
+              let tmp = arrRandomNum[i - 1]
+              arrRandomNum[i - 1] = arrRandomNum[i]
+              arrRandomNum[i] = tmp
+              changed = true
+            }
+            document.write(`${arrRandomNum}<br>`) // виводить масив на кожному єтапі сортування
+          }
+        } while (changed)
+      }
+      // Формуємо копію масиву
+      const arrCopy = JSON.parse(JSON.stringify(arr))
+      document.write("Масив на кожному етапі сортування бульбашкою: <br>")
+      // викликаємо функцію сортування бульбашкою
+      getNumChanged(arrCopy)
+
+      // функція сортування змішуванням
+      // функція міняє місцями елементи
+      function swap(arr, i, j) {
+        const akum = arr[i]
+        arr[i] = arr[j]
+        arr[j] = akum
+        document.write(`${arr}<br>`) // виводить масив на кожному єтапі сортування
+      }
+
+      // функція сортування змішуванням
+      function shakerSort(array) {
+        let numChanged = 0
+        let leftIndex = 0
+        let rightIndex = array.length - 1
+
+        while (leftIndex < rightIndex) {
+          for (let idx = leftIndex; idx < rightIndex; idx++) {
+            if (array[idx] > array[idx + 1]) {
+              swap(array, idx, idx + 1)
+            }
+          }
+          rightIndex--
+
+          for (let idx = rightIndex; idx > leftIndex; idx--) {
+            if (array[idx] < array[idx - 1]) {
+              swap(array, idx, idx - 1)
+            }
+          }
+          leftIndex++
+        }
+      }
+
+      // Формуємо копію масиву
+      const arrCopy1 = JSON.parse(JSON.stringify(arr))
+      document.write("Масив на кожному етапі сортування змішуванням: <br>")
+      // викликаємо функцію сортування змішуванням
+      shakerSort(arrCopy1)
+
+      //функція сортування включенням
+      function insertSort(arr) {
+        for (let k = 1; k < arr.length; k++) {
+          const currentElement = arr[k]
+          let i = k - 1
+          while (i >= 0 && arr[i] > currentElement) {
+            arr[i + 1] = arr[i]
+            i = i - 1
+          }
+          arr[i + 1] = currentElement
+          document.write(`${arr}<br>`) // виводить масив на кожному єтапі сортування
+        }
+      }
+
+      // Формуємо копію масиву
+      const arrCopy2 = JSON.parse(JSON.stringify(arr))
+      document.write("Масив на кожному етапі сортування включенням: <br>")
+      // викликаємо функцію сортування включенням
+      insertSort(arrCopy2)
+    </script>
+  </body>
+</html>
